@@ -8,7 +8,7 @@
 
 namespace {
 
-constexpr const char *DATA_DIR = "/home/obs/lun/md-logger/data";
+constexpr const char *DATA_DIR = "/home/obs/rep/cle/utils/mdlogger/data";
 
 long get_time_ms() {
   using namespace std::chrono;

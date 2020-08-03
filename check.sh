@@ -2,6 +2,8 @@
 
 # Basic script to run build and test command on all projects
 
+# Use `git clean -dfx` to make sure repo is clean befure runing tests
+
 CMAKE_CMD="make -j8 && make check -j8"
 if [[ $* == *--only-build* ]]; then {
   CMAKE_CMD="make -j8"
