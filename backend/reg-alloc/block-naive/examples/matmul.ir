@@ -1,0 +1,69 @@
+dist:
+.fun
+
+B0:
+	load %t0, %sp, 0
+	load %t1, %sp, 4
+	load %t2, %sp, 8
+	load %t3, %sp, 12
+	load %t4, %sp, 16
+	load %t5, %sp, 20
+
+	load %t7, %t0, 0
+  	mul %t8, %t7, %t4
+	load %t9, %t1, 0
+ 	load %t10, %t2, 0
+	mul %t11, %t10, %t9
+	load %t13, %t1, 4
+	load %t15, %t2, 8
+	mul %t16, %t15, %t13
+	add %t17, %t16, %t11
+	mul %t18, %t17, %t5
+	add %t19, %t18, %t8
+	store %t19, %t3, 0
+
+	load %t21, %t0, 4
+	mul %t22, %t21, %t4
+	load %t23, %t1, 0
+	load %t25, %t2, 4
+	mul %t26, %t25, %t23
+	load %t27, %t1, 4
+	load %t29, %t2, 12
+	mul %t30, %t29, %t27
+	add %t31, %t30, %t26
+	mul %t32, %t31, %t5
+	add %t33, %t32, %t22
+	store %t33, %t3, 4
+
+	load %t36, %t0, 8
+	mul %t37, %t36, %t4
+	load %t39, %1, 8
+	load %t40, %t2, 0
+	mul %t41, %t40, %t39
+	load %t43, %t1, 12
+	load %t44, %t2, 8
+	mul %t45, %t44, %t43
+	add %t46, %t45, %t41
+	mul %t47, %t46, %t5
+	add %t48, %t47, %t37
+	store %t48, %t3, 8
+	
+
+	load %t51, %t0, 12
+	mul %t52, %t51, %t4
+	load %t53, %t1, 8
+	load %t54, %t2, 4
+	mul %t55, %t54, %t53
+	load %t56, %t1, 12
+	load %t57, %t2, 12
+	mul %t58, %t57, %t56
+	add %t59, %t58, %t55
+	mul %t60, %t59, %t5
+	add %t61, %t60, %t52
+	store %t61, %t3, 12
+
+	mul %t63, %t61, %t19
+	mul %t64, %t48, %t33
+	sub %t65, %t63, %t64
+	mov %ret, %t65
+	ret
