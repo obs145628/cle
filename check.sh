@@ -26,7 +26,7 @@ check_cmake_proj() {
 }
 
 check_cmake_proj utils/libcpp_utils
-check_cmake_proj utils/libcpp_mdlogger
+check_cmake_proj utils/mdlogger/libcpp/
 check_cmake_proj utils/libcpp_gop10
 
 check_cmake_proj backend/reg-alloc/block-naive
