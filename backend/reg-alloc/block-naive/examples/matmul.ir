@@ -37,7 +37,7 @@ B0:
 
 	load %t36, %t0, 8
 	mul %t37, %t36, %t4
-	load %t39, %1, 8
+	load %t39, %t1, 8
 	load %t40, %t2, 0
 	mul %t41, %t40, %t39
 	load %t43, %t1, 12

@@ -2,13 +2,14 @@
 
 #include <chrono>
 #include <fstream>
+#include <iostream>
 #include <map>
 #include <sys/stat.h>
 #include <sys/types.h>
 
-namespace {
+#define DATA_DIR CMAKE_SRC_DIR "/../data/"
 
-constexpr const char *DATA_DIR = "/home/obs/rep/cle/utils/mdlogger/data";
+namespace {
 
 long get_time_ms() {
   using namespace std::chrono;
@@ -28,6 +29,12 @@ void write_conf(const std::string &path,
   std::ofstream os(path);
   for (const auto &x : data)
     os << x.first << " = " << x.second << "\n";
+
+  if (!os.good()) {
+    std::cerr << "MDLogger: Failed to write config file `" << path << "'"
+              << std::endl;
+    std::abort();
+  }
 }
 
 int g_argc;

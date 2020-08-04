@@ -1,7 +1,19 @@
 #include <mdlogger/mddocument.hh>
 
+#include <cstdlib>
+#include <iostream>
+
 MDDocument::MDDocument(const std::string &out_dir)
     : _dir(out_dir), _os(_dir + "/main.md"), _unique(0) {}
+
+MDDocument::~MDDocument() {
+
+  if (!_os.good()) {
+    std::cerr << "MDLogger: Failed to write data file in `" << _dir << "'"
+              << std::endl;
+    std::abort();
+  }
+}
 
 void MDDocument::code_begin(const std::string &language) {
   raw_os() << "```" << language << "\n";

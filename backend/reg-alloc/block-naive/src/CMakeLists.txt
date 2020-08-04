@@ -3,6 +3,8 @@ set(SRC
   isa/isa.cc
   isa/module.cc
 
+  lib/allocator.cc
+
   utils/digraph.cc
 
   main.cc

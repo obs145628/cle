@@ -38,6 +38,8 @@ public:
   MDDocument(const MDDocument &) = delete;
   MDDocument &operator=(const MDDocument &) = delete;
 
+  ~MDDocument();
+
   const std::string &out_dir() const { return _dir; }
   std::ostream &raw_os() { return _os; }
 
