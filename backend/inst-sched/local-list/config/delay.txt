@@ -1,0 +1,13 @@
+add 1
+sub 1
+mul 2
+neg 1
+loadi 1
+load 3
+store 3
+alloca 1
+mov 1
+icmp_eq 1
+bc 10
+retv 5
+ret 5

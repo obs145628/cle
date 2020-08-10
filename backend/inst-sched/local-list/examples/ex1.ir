@@ -1,0 +1,14 @@
+foo:
+.fun void, %p_a, %p_b, %p_c, %p_d
+
+B0:
+	load %r1, %p_a
+	add %r1, %r1, %r1
+	load %r2, %p_b
+	mul %r1, %r1, %r2
+	load %r2, %p_c
+	mul %r1, %r1, %r2
+	load %r2, %p_d
+	mul %r1, %r1, %r2
+	store %r1, %p_a
+	ret

@@ -1,0 +1,15 @@
+add 1
+sub 1
+mul 2
+div 3
+neg 1
+loadi 1
+load 4
+store 5
+mov 1
+cmp 1
+bc_eq 10
+bc_lt 10
+b 10
+retv 5
+ret 5

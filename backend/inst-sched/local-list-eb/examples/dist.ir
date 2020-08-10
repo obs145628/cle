@@ -1,0 +1,66 @@
+dist:
+.fun void, %v_a, %v_b, %v_c, %size, %abs
+
+B0:
+	loadi %res, 0
+	loadi %i, 0
+	cmp %r0, %i, %size
+	bc_eq %r0, @B8, @B1
+
+B1:
+	loadi %r0, 4
+	mul %r0, %i, %r0
+	loadi %r1, 1
+	add %i, %i, %r1
+	add %r1, %v_a, %r0
+	load %r1, %r1
+	add %r2, %v_b, %r0
+	load %r2, %r2
+	sub %diff, %r1, %r2
+	add %p_c, %v_c, %r0
+	loadi %r0, 0
+	cmp %r0, %abs, %r0
+	bc_eq %r0, @B2, @B3
+
+B2:
+	store %diff, %p_c
+	b @B7
+
+B3:
+	loadi %r0, 0
+	cmp %r0, %diff, %r0
+	bc_lt %r0, @B4, @B5
+
+B4:
+	loadi %r0, 0
+	sub %r0, %r0, %diff
+	store %r0, %p_c
+	b @B6
+
+B5:
+	store %diff, %p_c
+	b @B6
+
+B6:
+	add %r0, %i, %i
+	loadi %r1, 8
+	sub %r0, %r1, %r0
+	loadi %r1, 0
+	mul %r0, %r1, %r0
+	add %abs, %abs, %r0
+	b @B7
+
+B7:
+	mul %r0, %diff, %diff
+	add %res, %res, %r0
+	cmp %r0, %i, %size
+	bc_eq %r0, @B8, @B1
+
+B8:
+	add %r0, %res, %res
+	loadi %r1, 1
+	sub %r0, %r0, %r1
+	loadi %r1, 2
+	mul %r0, %r0, %r1
+	div %r0, %r0, %size
+	retv %r0

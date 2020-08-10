@@ -1,0 +1,26 @@
+foo:
+.fun void, %v_a, %p_a, %p_b, %p_c, %p_d, %p_e
+
+B0:
+	neg %t1, %v_a
+	loadi %n, 12
+	add %t2, %t1, %n
+	store %t2, %p_a
+
+	loadi %n, 16
+	add %t2, %t1, %n
+	store %t2, %p_b
+
+	loadi %n, 18
+	add %t2, %t1, %n
+	store %t2, %p_c
+
+	loadi %n, 6
+	add %t1, %n, %n
+	store %t1, %p_d
+
+	add %t1, %v_a, %v_a
+	store %t1, %p_e
+
+	sub %t1, %p_a, %p_b
+	retv %t1

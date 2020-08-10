@@ -31,5 +31,7 @@ check_cmake_proj utils/libcpp_utils
 check_cmake_proj utils/mdlogger/libcpp/
 check_cmake_proj utils/libcpp_gop10
 
+check_cmake_proj backend/inst-sched/local-list
+check_cmake_proj backend/inst-sched/local-list-eb
 check_cmake_proj backend/reg-alloc/block-naive
 check_cmake_proj backend/reg-alloc/block-bottomup

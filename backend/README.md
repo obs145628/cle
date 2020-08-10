@@ -2,6 +2,10 @@
 
 Compiler backend
 
+## inst-sched
+
+Instructions Scheduling Algorithms
+
 ## reg-alloc
 
-Register Allocation Algorithms
+Registers Allocation Algorithms
