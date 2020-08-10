@@ -1,0 +1,14 @@
+@ins normal add d u u
+@ins normal sub d u u
+@ins normal mul d u u
+@ins normal div d u u
+@ins normal neg d u
+@ins normal load d u c
+@ins normal store u u c
+@ins normal loadi d c
+@ins normal mov d u
+@ins normal cmp d u u
+@ins branch b b
+@ins branch bc u b b
+@ins normal phi d b u b u
+@ins ret ret

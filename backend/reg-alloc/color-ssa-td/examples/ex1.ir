@@ -1,0 +1,23 @@
+foo:
+.fun 
+
+B0:
+    load %a0, %sp, 4
+    bc %a0, @B1, @B2
+
+B1:
+    load %b0, %sp, 8
+    store %b0, %b0, 0
+    load %d0, %sp, 12
+    b @B2
+
+B2:
+    load %c0, %sp, 16
+    mov %d1, %c0
+    b @B3
+
+B3:
+    phi %d2, @B1, %d0, @B2, %d1
+    store %a0, %a0, 0
+    store %d2, %d2, 0
+    ret
