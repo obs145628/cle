@@ -12,3 +12,4 @@
 @ins branch bc u b b
 @ins normal phi d b u b u
 @ins ret ret
+@ins ret retv u

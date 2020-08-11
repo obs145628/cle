@@ -4,6 +4,10 @@ set(SRC
   isa/module.cc
 
   lib/allocator.cc
+  lib/block-freq.cc
+  lib/cfg.cc
+  lib/live-now.cc
+  lib/live-out.cc
 
   utils/digraph.cc
 

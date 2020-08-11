@@ -13,4 +13,4 @@ B0:
     mul %t7, %t6, %t3
     
     sub %ret, %t7, %t5
-    ret
+    retv %ret

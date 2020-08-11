@@ -127,20 +127,6 @@ Module::Module(const isa::Context &ctx, const gop::Module &mod) : Module(ctx) {
   PANIC_IF(bb, "unfinished block");
 }
 
-Module Module::clone(const Module &mod) {
-  Module res(mod.ctx());
-
-  for (auto fun : mod.funs()) {
-    auto new_fun = res.add_fun(fun->name(), fun->args());
-    for (auto bb : fun->bbs()) {
-      auto new_bb = new_fun->add_block(bb->name());
-      new_bb->code() = bb->code();
-    }
-  }
-
-  return res;
-}
-
 std::vector<Function *> Module::funs() {
   std::vector<Function *> res;
   for (auto &f : _funs)
@@ -178,6 +164,20 @@ void Module::dump_code(MDDocument &doc) const {
 void Module::check() const {
   for (const auto &fun : _funs)
     fun->check();
+}
+
+std::unique_ptr<Module> Module::clone() const {
+  auto res = std::make_unique<Module>(_ctx);
+
+  for (auto fun : funs()) {
+    auto new_fun = res->add_fun(fun->name(), fun->args());
+    for (auto bb : fun->bbs()) {
+      auto new_bb = new_fun->add_block(bb->name());
+      new_bb->code() = bb->code();
+    }
+  }
+
+  return res;
 }
 
 } // namespace isa

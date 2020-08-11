@@ -11,4 +11,4 @@ B0:
     add %t5, %t1, %t2
     add %t6, %t5, %t3
     add %ret, %t6, %t4
-    ret
+    retv %ret

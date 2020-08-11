@@ -9,7 +9,7 @@ B1:
     load %b0, %sp, 8
     store %b0, %b0, 0
     load %d0, %sp, 12
-    b @B2
+    b @B3
 
 B2:
     load %c0, %sp, 16

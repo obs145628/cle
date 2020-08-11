@@ -3,6 +3,7 @@
 #include <memory>
 #include <ostream>
 
+#include "analysis.hh"
 #include "isa.hh"
 #include <gop10/module.hh>
 
@@ -61,11 +62,16 @@ public:
 
   void check() const;
 
+  template <class T> const T &get_analysis() const;
+  template <class T> void invalidate_analysis();
+
 private:
   std::string _name;
   std::vector<std::string> _args;
   std::vector<std::unique_ptr<BasicBlock>> _blocks;
   Module *_parent;
+
+  mutable std::vector<std::unique_ptr<FunctionAnalysis>> _analysises;
 };
 
 class Module {
@@ -73,8 +79,6 @@ class Module {
 public:
   Module(const isa::Context &ctx);
   Module(const isa::Context &ctx, const gop::Module &mod);
-
-  static Module clone(const Module &mod);
 
   const isa::Context &ctx() const { return _ctx; }
 
@@ -89,9 +93,31 @@ public:
 
   void check() const;
 
+  std::unique_ptr<Module> clone() const;
+
 private:
   const isa::Context &_ctx;
   std::vector<std::unique_ptr<Function>> _funs;
 };
+
+template <class T> const T &Function::get_analysis() const {
+  for (const auto &fa : _analysises)
+    if (auto res = dynamic_cast<const T *>(fa.get()))
+      return *res;
+
+  auto new_fa = std::make_unique<T>(*this);
+  const T &res = *new_fa;
+  _analysises.push_back(std::move(new_fa));
+  return res;
+}
+
+template <class T> void Function::invalidate_analysis() {
+  auto it = _analysises.begin();
+  while (it != _analysises.end() && !dynamic_cast<T *>(it->get()))
+    ++it;
+
+  if (it != _analysises.end())
+    _analysises.erase(it);
+}
 
 } // namespace isa
