@@ -10,6 +10,7 @@ set(SRC
   lib/live-out.cc
 
   utils/digraph.cc
+  utils/graph.cc
 
   main.cc
 )

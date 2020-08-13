@@ -22,6 +22,8 @@ public:
   bool is_root(std::size_t id) const { return find(id) == id; }
   bool is_root(const T &a) const { return is_root(_id_map.at(a)); }
 
+  void compress();
+
 private:
   std::size_t _count;
   std::map<T, std::size_t> _id_map;

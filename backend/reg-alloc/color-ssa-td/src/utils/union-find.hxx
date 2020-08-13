@@ -2,6 +2,8 @@
 
 #include "union-find.hh"
 
+#include <cassert>
+
 template <class T> void UnionFind<T>::connect(const T &a, const T &b) {
   auto id_a = _gen_id(a);
   auto id_b = _gen_id(b);
@@ -39,6 +41,40 @@ template <class T> std::vector<T> UnionFind<T>::get_set(std::size_t id) const {
     if (find(it.first) == id)
       res.push_back(it.first);
   return res;
+}
+
+template <class T> void UnionFind<T>::compress() {
+  std::map<T, std::size_t> new_id_map;
+  std::vector<std::size_t> new_preds(items_count());
+  std::size_t root_idx = 0;
+  std::size_t leaf_idx = _count;
+
+  for (std::size_t i = 0; i < items_count(); ++i) {
+    if (!is_root(i))
+      continue;
+
+    auto items = get_set(i);
+
+    new_preds[root_idx] = root_idx;
+    new_id_map[items[0]] = root_idx;
+
+    for (auto it = items.begin() + 1; it != items.end(); ++it) {
+      new_preds[leaf_idx] = root_idx;
+      new_id_map[*it] = leaf_idx;
+      ++leaf_idx;
+    }
+
+    ++root_idx;
+  }
+
+  assert(root_idx == _count);
+  assert(leaf_idx == items_count());
+
+  _id_map = new_id_map;
+  _preds = new_preds;
+
+  // @TODO: update size
+  // Not needed if doesn't reinsert in the array
 }
 
 template <class T> std::size_t UnionFind<T>::_gen_id(const T &obj) {
