@@ -16,9 +16,7 @@ public:
   std::unique_ptr<MDDocument> add_doc(const std::string &name);
 
 private:
-  long _timestamp;
-  std::size_t _docs_count;
-  std::string _dir;
+  std::unique_ptr<MDDocument> _main_doc;
 
   MDLogger();
 };

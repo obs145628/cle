@@ -1,4 +1,5 @@
 set(SRC
+  mdconfig.cc
   mddocument.cc
   mdlogger.cc  
 )

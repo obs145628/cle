@@ -34,12 +34,16 @@ public:
   struct CodeHelper;
 
 public:
-  MDDocument(const std::string &out_dir);
+  MDDocument(const std::string &name, const std::string &type,
+             bool link_in_root);
   MDDocument(const MDDocument &) = delete;
   MDDocument &operator=(const MDDocument &) = delete;
 
   ~MDDocument();
 
+  const std::string &name() const { return _name; }
+  const std::string &id() const { return _id; }
+  const std::string &type() const { return _type; }
   const std::string &out_dir() const { return _dir; }
   std::ostream &raw_os() { return _os; }
 
@@ -54,12 +58,23 @@ public:
   std::string gen_file_name(const std::string &post = "");
   std::string gen_file_path(const std::string &post = "");
 
+  // Get file path of a local file, used on the WebApp to ref this file
+  std::string get_file_path(const std::string &filename) const;
+
+  // Add a link to another document
+  void doc_link(const std::string &doc_id, const std::string &text);
+  void doc_link(const MDDocument &doc, const std::string &text = "");
+
   template <class T> std::ostream &operator<<(const T &obj) {
     return raw_os() << obj;
   }
 
 private:
+  std::string _name;
+  std::string _id;
+  std::string _type;
   std::string _dir;
+  std::string _md_path;
   std::ofstream _os;
   std::size_t _unique;
 
