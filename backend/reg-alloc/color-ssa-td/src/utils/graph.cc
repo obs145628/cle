@@ -26,7 +26,7 @@ void Graph::dump_tree(MDDocument &doc) const {
   auto fname = doc.gen_file_name();
   std::ofstream os(doc.out_dir() + "/" + fname + ".dot");
   dump_tree(os);
-  doc.image("graph", fname + ".png");
+  doc.image("graph", doc.get_file_path(fname + ".png"));
 }
 
 std::size_t Graph::degree(std::size_t u) const {
