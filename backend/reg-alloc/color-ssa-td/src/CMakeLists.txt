@@ -6,8 +6,10 @@ set(SRC
   lib/allocator.cc
   lib/block-freq.cc
   lib/cfg.cc
+  lib/interference-graph.cc
   lib/live-now.cc
   lib/live-out.cc
+  lib/spill-cost.cc
 
   utils/digraph.cc
   utils/graph.cc
