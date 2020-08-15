@@ -1,0 +1,47 @@
+matvecmul:
+.fun void, %m_a, %v_b, %v_c, %m, %n
+
+B0:
+	load %m_a, %sp, 4
+	load %v_b, %sp, 8
+	load %v_c, %sp, 12
+	load %m, %sp, 16
+	load %n, %sp, 20
+	loadi %c0, 4
+	mul %n4, %n, %c0
+	loadi %i_0, 0
+	bc_z %m, @B4, @B1
+
+B1:
+	phi %i, @B0, %i_0, @B3, %i_next
+	loadi %val_0, 0
+	loadi %j4_0, 0
+	mul %t1, %n4, %i
+	add %mp, %m_a, %t1
+	bc_z %n4, @B3, @B2
+
+B2:
+	phi %val, @B1, %val_0,  @B2, %val_next
+	phi %j4, @B1, %j4_0, @B2, %j4_next
+	add %t3, %v_b, %j4
+	load %t4, %t3, 0
+	add %t5, %mp, %j4
+	load %t6, %t5, 0
+	mul %t7, %t6, %t4
+	add %val_next, %val, %t7
+	loadi %c2, 4
+	add %j4_next, %j4, %c2
+	bc_eq %n4, %j4_next, @B3, @B2
+
+B3:
+	phi %val_final, @B1, %val_0, @B2, %val_next
+	loadi %c3, 4
+	mul %t9, %i, %c3
+	add %t10, %v_c, %t9
+	store %val_final, %t10, 0
+	loadi %c4, 1
+	add %i_next, %i, %c4
+	bc_eq %m, %i_next, @B4, @B1
+
+B4:
+	ret

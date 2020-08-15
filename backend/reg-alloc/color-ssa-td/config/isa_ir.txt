@@ -10,6 +10,8 @@
 @ins normal cmp d u u
 @ins branch b b
 @ins branch bc u b b
+@ins branch bc_z u b b
+@ins branch bc_eq u u b b
 @ins normal phi d b u b u
 @ins ret ret
 @ins ret retv u
