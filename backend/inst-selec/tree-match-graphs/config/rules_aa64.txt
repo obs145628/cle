@@ -1,0 +1,79 @@
+root   ; @ins_root               ; 0 ; |
+
+@ins_root; @ins_ret              ; 0 ; |
+@ins_root; @ins_store            ; 0 ; |
+@ins_root; @ins_savereg          ; 0 ; |
+@ins_root; @ins_bc               ; 0 ; |
+
+@ins_ret ; retv reg          ; 2 ; mov %w0 $0    | ret
+@ins_ret ; ret               ; 1 ; ret
+
+@ins_store ; store reg reg ; 10 ; str_v1 $0 $1 0
+@ins_store ; store reg ins_store_v1 ; 10 ; str_v1 $0 $1.1 $1.2
+ins_store_v1 ; add * reg reg    ; 0 ; |
+ins_store_v1 ; add * reg const  ; 0 ; |
+ins_store_v1 ; add * const reg  ; 0 ; |
+@ins_store   ; store reg ins_store_lsl2 ; 10 ; str_v1_lsl $0 $1.1 $1.2.1 2
+ins_store_lsl2 ; add * reg ins_store_lsl2_b ; 0 ; |
+ins_store_lsl2_b ; mul * reg c4 ; 0 ; |
+
+@ins_savereg ; @reg_tp             ; 0 ; |
+
+@ins_bc      ; bc bc_icmp_eq block block ; 31 ; cmp $0.1 $0.2 | b_ne $2 | b $1
+bc_icmp_eq   ; icmp_eq * reg reg ; 0 ; |
+bc_icmp_eq   ; icmp_eq * reg const ; 0 ; |
+bc_icmp_eq   ; icmp_eq * const reg ; 0 ; |
+
+@ins_bc      ; bc bc_icmp_eq0 block block ; 30 ; cbz $0.1 $1 | b $2
+bc_icmp_eq0  ; icmp_eq * reg c0 ; 0 ; |
+
+block   ; @b                ; 0 ; |
+const   ; @c                ; 0 ; |
+c0      ; @c :val=0         ; 0 ; |
+c2      ; @c :val=2         ; 0 ; |
+c4      ; @c :val=4         ; 0 ; |
+reg     ; @reg_tp           ; 0 ; |
+@reg_tp ; @r                ; 0 ; |
+@reg_tp ; @c                ; 1 ; mov $$ $
+@reg_tp ; @reg_add          ; 0 ; |
+@reg_tp ; @reg_sub          ; 0 ; |
+@reg_tp ; @reg_mul          ; 0 ; |
+@reg_tp ; @reg_neg          ; 0 ; |
+@reg_tp ; @reg_load         ; 0 ; |
+@reg_tp ; @reg_mov          ; 0 ; |
+
+@reg_add    ; add * reg reg     ; 1 ; add $$ $1 $2
+@reg_add    ; add * reg const   ; 1 ; add $$ $1 $2
+@reg_add    ; add * const reg   ; 1 ; add $$ $1 $2
+@reg_add    ; add * const const ; 1 ; add $$ $1 $2
+@reg_add    ; add * reg_add_mul2 const ; 1 ; add_lsl $$ $2 $1.1 1
+reg_add_mul2 ; mul * reg c2 ; 0 ; |
+@reg_add    ; add * reg_madd reg ; 3 ; madd $$ $1.1 $1.2 $2
+@reg_add    ; add * reg reg_madd ; 3 ; madd $$ $2.1 $2.2 $1
+reg_madd    ; mul * reg reg      ; 0 ; |
+
+@reg_sub    ; sub * reg reg     ; 1 ; sub $$ $1 $2
+@reg_sub    ; sub * reg const   ; 1 ; sub $$ $1 $2
+@reg_sub    ; sub * const reg   ; 1 ; sub $$ $1 $2
+@reg_sub    ; sub * const const ; 1 ; sub $$ $1 $2
+@reg_mul    ; mul * reg reg     ; 3 ; mul $$ $1 $2
+@reg_mul    ; mul * reg const   ; 3 ; mul $$ $1 $2
+@reg_mul    ; mul * const reg   ; 3 ; mul $$ $1 $2
+@reg_mul    ; mul * const const ; 3 ; mul $$ $1 $2
+@reg_mul    ; mul * reg c4      ; 1 ; mov_lsl $$ $1 $2 2
+@reg_neg    ; neg * reg         ; 1 ; neg $$ $1
+@reg_neg    ; neg * reg_neg_mul ; 3 ; mneg $$ $1.1 $1.2
+reg_neg_mul   ; mul * reg reg  ; 0 ; |
+reg_neg_mul   ; mul * reg const  ; 0 ; |
+reg_neg_mul   ; mul * const reg  ; 0 ; |
+reg_neg_mul   ; mul * const const  ; 0 ; |
+
+
+@reg_load ; load * reg ; 10 ; ldr_v1 $$ $1 0
+@reg_load ; load * reg_load_add ; 10 ; ldr_v1 $$ $1.1 $1.2
+reg_load_add ; add * reg reg   ; 0 ; |
+reg_load_add ; add * reg const ; 0 ; |
+reg_load_add ; add * const reg ; 0 ; |
+
+@reg_mov ; mov * reg ; 1 ; mov $$ $1
+@reg_mov ; mov * const ; 1 ; mov $$ $1

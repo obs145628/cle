@@ -1,0 +1,43 @@
+root   ; @ins_root            ; 0 ; |
+
+@ins_root ; @ins_ret          ; 0 ; |
+@ins_root ; @ins_store        ; 0 ; |
+@ins_root ; @ins_savereg      ; 0 ; |
+
+@ins_ret ; retv reg          ; 2 ; movl $0 %eax    | retq
+
+@ins_store ; store reg reg   ; 10 ; movl_v1 $0 $1 0
+@ins_store ; store reg ins_store_add  ; 10 ; movl_v1 $0 $1.1 $1.2
+ins_store_add ; add * reg const ; 0 ; |
+
+@ins_savereg ; @temp_gen        ; 0 ; |
+
+const  ; @c                 ; 0 ; |
+c2     ; @c :val=2          ; 0 ; |
+reg    ; @r                 ; 0 ; |
+reg    ; @temp_gen          ; 0 ; |
+temp ; @temp_gen            ; 0 ; |
+@temp_gen    ; @temp_prim      ; 0 ; |
+@temp_gen    ; @temp_add       ; 0 ; |
+@temp_gen    ; @temp_sub       ; 0 ; |
+@temp_gen    ; @temp_mul       ; 0 ; |
+@temp_gen    ; @temp_neg       ; 0 ; |
+@temp_gen    ; @temp_load      ; 0 ; |
+@temp_prim   ; @c                 ; 1 ; movl $ $$
+@temp_prim   ; @r                 ; 1 ; movl $ $$
+@temp_add    ; add * reg reg      ; 1 ; leal $1 $2 $$
+@temp_add    ; add * temp reg     ; 1 ; addl $2 $1
+@temp_add    ; add * temp const   ; 1 ; addl $2 $1
+@temp_add    ; add * const temp   ; 1 ; addl $1 $2
+@temp_sub    ; sub * temp reg     ; 1 ; subl $2 $1
+@temp_sub    ; sub * temp const   ; 1 ; subl $2 $1
+@temp_mul    ; mul * temp reg     ; 5 ; imull $2 $1
+@temp_mul    ; mul * temp const   ; 5 ; imull $2 $1
+@temp_mul    ; mul * const temp   ; 5 ; imull $1 $2
+@temp_mul    ; mul * temp c2      ; 1 ; addl $1 $1
+@temp_mul    ; mul * c2 temp      ; 1 ; addl $2 $2
+@temp_neg    ; neg * temp         ; 1 ; negl $1
+
+@temp_load   ; load * reg         ; 10 ; movl_v2 $1 0 $$
+@temp_load   ; load * temp_load_add ; 10 ; movl_v2 $1.1 $1.2 $$
+temp_load_add ; add * reg const ; 0 ; |
