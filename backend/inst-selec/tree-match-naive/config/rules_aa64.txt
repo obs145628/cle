@@ -1,0 +1,32 @@
+root   ; @insret            ; 0 ; |
+@insret ; retv reg          ; 2 ; mov %w0 $0    | ret
+const  ; @c                ; 0 ; |
+c2     ; @c :val=2         ; 0 ; |
+reg    ; @r                ; 0 ; |
+reg    ; @c                ; 1 ; mov $$ $0
+reg   ; @reg_add            ; 0 ; |
+reg   ; @reg_sub            ; 0 ; |
+reg   ; @reg_mul            ; 0 ; |
+reg   ; @reg_neg            ; 0 ; |
+
+@reg_add    ; add * reg reg     ; 1 ; add $$ $1 $2
+@reg_add    ; add * reg const   ; 1 ; add $$ $1 $2
+@reg_add    ; add * const reg   ; 1 ; add $$ $1 $2
+@reg_add    ; add * const const ; 1 ; add $$ $1 $2
+@reg_add    ; add * reg_add_mul2 const ; 1 ; add_lsl $$ $2 $1.1 1
+reg_add_mul2 ; mul * reg c2 ; 0 ; |
+
+@reg_sub    ; sub * reg reg     ; 1 ; sub $$ $1 $2
+@reg_sub    ; sub * reg const   ; 1 ; sub $$ $1 $2
+@reg_sub    ; sub * const reg   ; 1 ; sub $$ $1 $2
+@reg_sub    ; sub * const const ; 1 ; sub $$ $1 $2
+@reg_mul    ; mul * reg reg     ; 1 ; mul $$ $1 $2
+@reg_mul    ; mul * reg const   ; 1 ; mul $$ $1 $2
+@reg_mul    ; mul * const reg   ; 1 ; mul $$ $1 $2
+@reg_mul    ; mul * const const ; 1 ; mul $$ $1 $2
+@reg_neg    ; neg * reg         ; 1 ; neg $$ $1
+@reg_neg    ; neg * reg_neg_mul ; 1 ; mneg $$ $1.1 $1.2
+reg_neg_mul   ; mul * reg reg  ; 0 ; |
+reg_neg_mul   ; mul * reg const  ; 0 ; |
+reg_neg_mul   ; mul * const reg  ; 0 ; |
+reg_neg_mul   ; mul * const const  ; 0 ; |

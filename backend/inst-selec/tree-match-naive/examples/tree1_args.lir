@@ -1,0 +1,11 @@
+foo:
+.fun int, %x, %y, %z, %t
+
+B0:
+	mul %t1, %x, 2
+	add %t2, %t1, 7
+	add %t3, %z, %y
+	sub %t4, %t3, %t
+	mul %t5, %t2, %t4
+	neg %t6, %t5
+	retv %t6

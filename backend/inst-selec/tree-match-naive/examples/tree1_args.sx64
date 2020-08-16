@@ -1,0 +1,12 @@
+foo:
+.fun
+
+B0:
+	addl %edi, %edi
+	addl 7, %edi
+	addl %edx, %esi
+	subl %ecx, %esi
+	imull %edi, %esi
+	negl %esi
+	movl %esi, %eax
+	retq

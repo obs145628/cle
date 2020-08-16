@@ -1,0 +1,9 @@
+foo:
+.fun
+
+B0:
+	add_lsl %t0, 7, %w0, 1
+	add %t1, %w2, %w1
+	sub %t1, %t1, %w3
+	mneg %w0, %t0, %t1
+	ret

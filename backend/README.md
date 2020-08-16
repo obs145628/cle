@@ -6,6 +6,10 @@ Compiler backend
 
 Instructions Scheduling Algorithms
 
+## inst-selec
+
+Instructions Selection Algorithms
+
 ## reg-alloc
 
 Registers Allocation Algorithms
