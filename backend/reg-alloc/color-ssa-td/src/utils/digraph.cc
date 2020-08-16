@@ -1,8 +1,7 @@
 #include "digraph.hh"
 
 #include <fstream>
-
-#include <mdlogger/mddocument.hh>
+#include <logia/md-gfm-doc.hh>
 
 Digraph::Digraph(std::size_t v) : _v(v), _e(0), _adj(v * v, 0) {
   for (std::size_t i = 0; i < v; ++i)
@@ -47,7 +46,7 @@ void Digraph::dump_tree(std::ostream &os) const {
   os << "}\n";
 }
 
-void Digraph::dump_tree(MDDocument &doc) const {
+void Digraph::dump_tree(logia::MdGfmDoc &doc) const {
   auto fname = doc.gen_file_name();
   std::ofstream os(doc.out_dir() + "/" + fname + ".dot");
   dump_tree(os);

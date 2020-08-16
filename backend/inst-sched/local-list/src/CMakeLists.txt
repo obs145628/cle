@@ -11,4 +11,4 @@ set(SRC
   utils/digraph.cc
 )
 add_executable(isched-local-list ${SRC})
-target_link_libraries(isched-local-list mdlogger gop10 utils_cli utils_str)
+target_link_libraries(isched-local-list logia gop10 utils_cli utils_str)

@@ -17,4 +17,4 @@ set(SRC
   main.cc
 )
 add_executable(ralloc-col-ssa-td ${SRC})
-target_link_libraries(ralloc-col-ssa-td mdlogger gop10 utils_cli utils_str)
+target_link_libraries(ralloc-col-ssa-td logia gop10 utils_cli utils_str)

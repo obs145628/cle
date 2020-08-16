@@ -1,20 +1,25 @@
-# MDLogger
+# logia
 
-MDLogger is a library to log program execution and statistics in more organized and graphical way than just dumping to stdout, and writing log / image files.  
+logia is a library to log program execution and statistics in more organized and graphical way than just dumping to stdout, and writing log / image files.  
 
-All logging is written to files using Markdown syntax.  
+All logging is written to files using a formated text syntax.  
 
 These files are then compiled to html, and can be displayed using a WebApplication.  
 
+## Text formats:
+
+- [cmark-gfm](https://github.com/github/cmark-gfm): Github version of Markdown
+
+
 ## Data System
 
-All generated markdown files lives in `./data` directory
+All generated files lives in `./data` directory
 
-There is a lat list of markdown documents.  
+There is a flat list ofdocuments.  
 Each is represented by a directory, it contains:
 - a configuration file.
-- the markdown file.
-- other resource files (images, dot files, etc) used by the markdown.
+- the main text file file.
+- other resource files (images, dot files, etc) used by the document.
 
 Documents may connect to other documents using links.
 
@@ -22,7 +27,8 @@ One special document is the root document. There is no related directory, it is 
 It contain links to all documents with option `link-in-root` set.  
 
 Usually, when an executable is ran, it generates one main document with `link-in-root`, 
-and other documents with links from the main one.
+and other documents with links from the main one.  
+This can be done with the `Corpus` class in lib implementations
 
 
 

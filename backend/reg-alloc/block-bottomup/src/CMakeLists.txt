@@ -10,4 +10,4 @@ set(SRC
   main.cc
 )
 add_executable(ralloc-bottomup ${SRC})
-target_link_libraries(ralloc-bottomup mdlogger gop10 utils_cli utils_str)
+target_link_libraries(ralloc-bottomup logia gop10 utils_cli utils_str)

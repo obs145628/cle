@@ -5,8 +5,7 @@
 
 #include "isa.hh"
 #include <gop10/module.hh>
-
-class MDDocument;
+#include <logia/fwd.hh>
 
 namespace isa {
 
@@ -30,7 +29,7 @@ public:
   void add_ins(const ins_t &ins);
 
   void dump_code(std::ostream &os) const;
-  void dump_code(MDDocument &doc) const;
+  void dump_code(logia::MdGfmDoc &doc) const;
   void dump_ins(std::ostream &os, std::size_t idx) const;
 
   void check() const;
@@ -57,7 +56,7 @@ public:
   BasicBlock *add_block(const std::string &name);
 
   void dump_code(std::ostream &os) const;
-  void dump_code(MDDocument &doc) const;
+  void dump_code(logia::MdGfmDoc &doc) const;
 
   void check() const;
 
@@ -83,7 +82,7 @@ public:
                     const std::vector<std::string> &args);
 
   void dump_code(std::ostream &os) const;
-  void dump_code(MDDocument &doc) const;
+  void dump_code(logia::MdGfmDoc &doc) const;
 
   void check() const;
 

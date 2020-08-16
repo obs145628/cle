@@ -6,19 +6,20 @@
 #include "isa/module.hh"
 #include "lib/allocator.hh"
 #include <gop10/module.hh>
-#include <mdlogger/mdlogger.hh>
+#include <logia/md-gfm-doc.hh>
+#include <logia/program.hh>
 
 #define ISA_IR (CMAKE_SRC_DIR "/config/isa_ir.txt")
 
 void dump_mod(const std::string &title, const isa::Module &mod) {
-  auto doc = MDLogger::instance().add_doc(title);
+  auto doc = logia::Program::instance().add_doc<logia::MdGfmDoc>(title);
   mod.dump_code(*doc);
   mod.dump_code(std::cout);
   mod.check();
 }
 
 int main(int argc, char **argv) {
-  MDLogger::init(argc, argv);
+  logia::Program::set_command(argc, argv);
   if (argc < 3) {
     std::cerr << "Usage: ./ralloc-col-ssa-td <ir-file> <hr-count>" << std::endl;
     return 1;

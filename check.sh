@@ -46,8 +46,8 @@ check_cargo_proj() {
 }
 
 check_cmake_proj utils/libcpp_utils
-check_cargo_proj utils/mdlogger/server
-check_cmake_proj utils/mdlogger/libcpp
+check_cargo_proj utils/logia/server
+check_cmake_proj utils/logia/libcpp
 check_cmake_proj utils/libcpp_gop10
 
 check_cmake_proj backend/inst-sched/local-list

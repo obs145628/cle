@@ -56,7 +56,7 @@ pub fn build_doc(id: &str) -> DocConfig {
     // Convert main input file
     match conf.doc_type() {
 
-        "markdown" => {
+        "cmark-gfm" => {
             // Convert markdown file
             let md_path = data_path.join("main.md");
             let out_html_path = out_path.join("main.html");

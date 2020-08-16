@@ -5,8 +5,7 @@
 #include <vector>
 
 #include "iterators.hh"
-
-class MDDocument;
+#include <logia/fwd.hh>
 
 class Graph {
 
@@ -107,7 +106,7 @@ public:
 
   // dump to tree-file syntax
   void dump_tree(std::ostream &os) const;
-  void dump_tree(MDDocument &doc) const;
+  void dump_tree(logia::MdGfmDoc &doc) const;
 
   void labels_set_vertex_name(std::size_t u, const std::string &name);
 

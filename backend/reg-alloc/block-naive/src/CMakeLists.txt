@@ -10,4 +10,4 @@ set(SRC
   main.cc
 )
 add_executable(ralloc-block-naive ${SRC})
-target_link_libraries(ralloc-block-naive mdlogger gop10 utils_cli utils_str)
+target_link_libraries(ralloc-block-naive logia gop10 utils_cli utils_str)

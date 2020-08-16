@@ -2,17 +2,17 @@
 #include <fstream>
 #include <iostream>
 
-#include <gop10/module.hh>
-#include <mdlogger/mdlogger.hh>
-
 #include "isa/isa.hh"
 #include "isa/module.hh"
 #include "lib/sched.hh"
+#include <gop10/module.hh>
+#include <logia/md-gfm-doc.hh>
+#include <logia/program.hh>
 
 #define ISA_IR (CMAKE_SRC_DIR "/config/isa_ir.txt")
 
 int main(int argc, char **argv) {
-  MDLogger::init(argc, argv);
+  logia::Program::set_command(argc, argv);
   if (argc < 2) {
     std::cerr << "Usage: ./isched-local-list <ir-file>" << std::endl;
     return 1;

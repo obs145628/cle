@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include <mdlogger/mddocument.hh>
+#include <logia/md-gfm-doc.hh>
 #include <utils/cli/err.hh>
 
 namespace isa {
@@ -17,7 +17,7 @@ void BasicBlock::dump_code(std::ostream &os) const {
   }
 }
 
-void BasicBlock::dump_code(MDDocument &doc) const {
+void BasicBlock::dump_code(logia::MdGfmDoc &doc) const {
   auto ch = doc.code("asm");
   dump_code(ch.os());
 }
@@ -79,7 +79,7 @@ void Function::dump_code(std::ostream &os) const {
   }
 }
 
-void Function::dump_code(MDDocument &doc) const {
+void Function::dump_code(logia::MdGfmDoc &doc) const {
   auto ch = doc.code("asm");
   dump_code(ch.os());
 }
@@ -156,7 +156,7 @@ void Module::dump_code(std::ostream &os) const {
   }
 }
 
-void Module::dump_code(MDDocument &doc) const {
+void Module::dump_code(logia::MdGfmDoc &doc) const {
   auto ch = doc.code("asm");
   dump_code(ch.os());
 }

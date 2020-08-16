@@ -39,7 +39,7 @@ fn build_root(st: &stats::Stats) {
     let mut conf = doc_config::DocConfig::new();
     conf.set_id(conf::root_id());
     conf.set_name("Home");
-    conf.set_type("markdown");
+    conf.set_type("cmark-gfm");
     let conf_path = root_path.join("config.txt");
     conf.write_file(&conf_path);
 }

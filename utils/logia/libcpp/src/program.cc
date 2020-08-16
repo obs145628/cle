@@ -1,10 +1,14 @@
-#include <mdlogger/mdlogger.hh>
+#include <logia/program.hh>
 
 #include <cassert>
 #include <chrono>
 #include <fstream>
 #include <iostream>
 #include <map>
+
+#include <logia/md-gfm-doc.hh>
+
+namespace logia {
 
 namespace {
 
@@ -20,30 +24,30 @@ std::string get_cmd_line() {
 
 } // namespace
 
-MDLogger &MDLogger::instance() {
-  static MDLogger res;
+Program &Program::instance() {
+  static Program res;
   return res;
 }
 
-void MDLogger::init(int argc, char **argv) {
+void Program::set_command(int argc, char **argv) {
   g_argc = argc;
   g_argv = argv;
 }
 
-MDLogger::MDLogger() {
+Program::Program() {
   assert(g_argc && g_argv);
 
   auto main_name = get_cmd_line();
-  _main_doc = std::make_unique<MDDocument>(main_name, "markdown", true);
+  _main_doc = std::make_unique<MdGfmDoc>(main_name, true);
 }
 
-std::unique_ptr<MDDocument> MDLogger::add_doc(const std::string &name) {
-  auto res = std::make_unique<MDDocument>(name, "markdown", false);
+Program::~Program() {}
 
+void Program::_on_add(const Document &doc) {
   *_main_doc << "- ";
-  _main_doc->doc_link(*res);
+  _main_doc->doc_link(doc);
   *_main_doc << "\n";
   _main_doc->raw_os().flush();
-
-  return res;
 }
+
+} // namespace logia
