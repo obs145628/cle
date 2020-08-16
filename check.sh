@@ -55,3 +55,4 @@ check_cmake_proj backend/inst-sched/local-list-eb
 check_cmake_proj backend/reg-alloc/block-naive
 check_cmake_proj backend/reg-alloc/block-bottomup
 check_cmake_proj backend/reg-alloc/color-ssa-td
+check_cmake_proj backend/reg-alloc/color-ssa-bu

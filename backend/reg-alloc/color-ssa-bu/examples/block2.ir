@@ -1,0 +1,14 @@
+foo:
+.fun 
+
+B0:
+    load %t0, %sp, 4
+    load %t1, %t0, 0
+    load %t2, %t0, 4
+    load %t3, %t0, 8
+    load %t4, %t0, 12
+    
+    add %t5, %t1, %t2
+    add %t6, %t5, %t3
+    add %ret, %t6, %t4
+    retv %ret

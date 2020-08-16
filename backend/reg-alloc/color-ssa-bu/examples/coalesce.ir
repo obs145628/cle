@@ -1,0 +1,17 @@
+foo:
+.fun 
+
+B0:
+    load %a, %sp, 4
+    loadi %t0, 3
+    add %t1, %a, %t0
+    store %a, %t1, 0
+
+    mov %b, %a
+    mov %c, %a
+    add %t2, %b, %c
+    store %t2, %b, 0
+    loadi %t3, 7
+    add %t4, %b, %t3
+    add %t5, %t4, %c
+    retv %t5
