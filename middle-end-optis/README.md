@@ -8,6 +8,12 @@ Dead Code Elimination.
 Remove instructions unused / without side effects, empty and unreachable blocks
 Engineer a Compiler Book.
 
+## dominance (C++ / LLVM)
+
+Dominance Sets.  
+Build the dominance sets of every basic blocks.  
+Engineer a Compiler Book.
+
 ## dom-value-numbering (C++)
 
 Dominator Based value numbering technique.  
