@@ -1,0 +1,25 @@
+f1:
+.fun void, %x, %y
+b0:
+	add %r, %x, %y
+	ret
+
+f2:
+.fun void, %x
+        call @f1, %x, %x
+	ret
+
+f3:
+.fun void, %x
+        call @f1, %x, 3
+	ret
+
+f4:
+.fun void
+     call @f1, 7, 3
+     ret
+
+f5:
+.fun void
+     call @f2, 3
+     ret

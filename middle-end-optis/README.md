@@ -42,3 +42,11 @@ Engineer a Compiler Book.
 Immediate Dominator.  
 Build Dominator tree and Immediate Dominator / Dominator sets.  
 Engineer a Compiler Book.
+
+## interproc-constprop (C++)
+
+Interprocedular Constant Propagation.  
+Constant Propagation through call sites.  
+If all call sites use same constant value for an argument, can be propogated to function body.  
+Input code is SSA.  
+Engineer a Compiler Book.
