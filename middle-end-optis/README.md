@@ -22,3 +22,9 @@ Found duplicate accross multiple basic blocks using block from parents in DOM tr
 Input code is SSA.  
 Engineer a Compiler Book.
 
+## fun-inliner (C++)
+
+Function inlining.  
+Inline all function calls.  
+Heursitic choice not implemented.  
+Engineer a Compiler Book.

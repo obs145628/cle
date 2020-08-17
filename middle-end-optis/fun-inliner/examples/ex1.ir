@@ -1,0 +1,67 @@
+my_add:
+.fun %x, %y
+	add %r, %x, %y
+	ret %r
+
+
+
+my_min:
+.fun %x, %y
+	cmpslt %c, %x, %y
+	bc %c, @.rx, @.ry
+
+.rx:
+	mov %r, %x
+	b @.end
+
+.ry:
+	mov %r, %y
+	b @.end
+
+.end:
+	ret %r
+
+
+my_max:
+.fun %x, %y
+	cmpslt %c, %x, %y
+	bc %c, @.ry, @.rx
+
+.rx:
+	ret %x
+
+.ry:
+	ret %y
+
+my_min3:
+.fun %x, %y, %z
+     call %min, @my_min, %x, %y
+     call %min, @my_min, %min, %z
+     ret %min
+
+my_max3:
+.fun %x, %y, %z
+     call %max, @my_max, %x, %y
+     call %max, @my_max, %max, %z
+     ret %max
+
+
+fibo_rec:
+.fun %x
+	cmpslt %c, %x $2
+     	bc %c, @.base, @.rec
+
+.base:
+	mov %r, %x
+	b @.end
+
+.rec:
+	add %p1, %x, -1
+	add %p2, %x, -2
+	call %r1, @fibo_rec, %p1
+	call %r2, @fibo_rec, %p2
+	call %r, @my_add, %r1, %r2
+	b @.end
+
+.end:
+	ret %r
