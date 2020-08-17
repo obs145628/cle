@@ -1,0 +1,19 @@
+@ins normal add d c|u c|u
+@ins normal add_lsl d c|u c|u c|u
+@ins normal mneg d c|u c|u
+@ins normal mul d c|u c|u
+@ins normal madd d c|u c|u c|u
+@ins normal neg d c|u
+@ins normal mov d c|u
+@ins normal mov_lsl d c|u c
+@ins ret ret
+@ins normal sub d c|u c|u
+@ins normal ldr_v1 d u c|u
+@ins normal str_v1 c|u u c|u
+@ins normal str_v1_lsl c|u u c|u c
+@ins normal cmp c|u c|u
+@ins normal cset_eq d
+@ins branch b b
+@ins branch b_ne b
+@ins branch b_eq b
+@ins branch cbz u b

@@ -1,0 +1,46 @@
+
+root ; ins_ret          ; 0 ; |
+root ; ins_store        ; 0 ; |
+root ; ins_savereg      ; 0 ; |
+root ; ins_bc           ; 0 ; |
+
+ins_ret     ; retv(reg_gen) ; 1 ; set($0.D, %eax) | emit(retq)
+ins_ret     ; ret           ; 1 ; emit(retq)
+ins_savereg ; reg           ; 0 ; set($D, $def)
+
+
+ins_store ; store(reg, reg)               ; 10 ; emit(movl_v1, $0.D, $1.D, 0)
+ins_store ; store(reg, add(reg, const))   ; 10 ; emit(movl_v1, $0.D, $1.0.D, $1.1.val)
+
+ins_bc    ; bc(icmp_eq(reg, reg), block, block) ; 33 ; emit(cmpq, $0.0.D, $0.1.D) | emit(jne, $2.name) | emit(jmp, $1.name)
+
+ins_bc    ; bc(icmp_eq(reg, c0), block, block) ; 32 ; emit(testq, $0.0.D, $0.0.D) | emit(je, $1.name) | emit(jmp, $2.name)
+
+block   ; __block__         ;  0 ; |
+const   ; __const__0        ;  0 ; |
+const   ; __const__2        ;  0 ; |
+const   ; __const__4        ;  0 ; |
+const   ; __const__x        ;  0 ; |
+c0      ; __const__0        ;  0 ; |
+c2      ; __const__2        ;  0 ; |
+c4      ; __const__4        ;  0 ; |
+reg     ; __reg__           ;  0 ; set($D, $name)
+reg     ; reg_gen           ;  0 ; |
+reg_gen ; const             ;  1 ; emit(movl, $val, $D)
+reg_gen ; __reg__           ;  1 ; emit(movl, $name, $D)
+
+reg_gen ; add(reg, reg_gen)             ;  1 ; set($1.D, $D) | emit(addl, $0.D, $D)
+reg_gen ; add(reg_gen, reg)             ;  1 ; set($0.D, $D) | emit(addl, $1.D, $D)
+reg_gen ; add(const, reg_gen)           ;  1 ; set($1.D, $D) | emit(addl, $0.val, $D)
+reg_gen ; add(reg_gen, const)           ;  1 ; set($0.D, $D) | emit(addl, $1.val, $D)
+
+reg_gen ; mul(reg, reg_gen)             ;  3 ; set($1.D, $D) | emit(imull, $0.D, $D)
+reg_gen ; mul(reg_gen, reg)             ;  3 ; set($0.D, $D) | emit(imull, $1.D, $D)
+reg_gen ; mul(reg, c4)                  ;  1 ; emit(leal_v2, $0.D, 4, $D)
+
+reg_gen ; load(reg)                     ; 10 ; emit(movl_v2, $0.D, 0, $D)
+reg_gen ; load(add(reg, const))         ; 10 ; emit(movl_v2, $0.0.D, $0.1.val, $D)
+reg_gen ; load(add(reg, reg))           ; 10 ; emit(movl_v3, $0.0.D, $0.1.D, 0, $D)
+
+reg_gen ; mov(reg)                      ; 1  ; emit(movl, $0.D, $D)
+reg_gen ; mov(const)                    ; 1  ; emit(movl, $0.val, $D)

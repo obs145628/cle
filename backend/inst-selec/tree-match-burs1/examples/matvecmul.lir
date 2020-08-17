@@ -1,0 +1,38 @@
+matvecmul:
+.fun void, %m_a, %v_b, %v_c, %m, %n
+
+B0:
+	mul %n4, %n, 4
+	mov %i, 0
+	icmp_eq %t0, %m, 0
+	bc %t0, @B4, @B1
+
+B1:
+	mov %val, 0
+	mov %j4, 0
+	mul %t1, %n4, %i
+	add %mp, %m_a, %t1
+	icmp_eq %t2, %n4, 0
+	bc %t2, @B3, @B2
+
+B2:
+	add %t3, %v_b, %j4
+	load %t4, %t3
+	add %t5, %mp, %j4
+	load %t6, %t5
+	mul %t7, %t6, %t4
+	add %val, %val, %t7
+	add %j4, %j4, 4
+	icmp_eq %t8, %n4, %j4
+	bc %t8, @B3, @B2
+
+B3:
+	mul %t9, %i, 4
+	add %t10, %v_c, %t9
+	store %val, %t10
+	add %i, %i, 1
+	icmp_eq %t11, %m, %i
+	bc %t11, @B4, @B1
+
+B4:
+	ret

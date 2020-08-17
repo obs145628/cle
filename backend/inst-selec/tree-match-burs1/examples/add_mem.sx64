@@ -1,0 +1,14 @@
+add_fun:
+.fun
+
+B0:
+	pushq %rbp
+	movq %rsp, %rbp
+	movl_v1 %edi, %rbp, -4
+	movl_v1 %esi, %rbp, -8
+	movl_v2 %rbp, -4, %eax
+	movl_v2 %rbp, -8, %ecx
+	addl %ecx, %eax
+	popq %rbp
+	retq
+

@@ -1,0 +1,12 @@
+add_fun:
+.fun int, %x, %y
+
+B0:
+	alloca %v1
+	alloca %v2
+	store %x, %v1
+	store %y, %v2
+	load %t1, %v1
+	load %t2, %v2
+	add %t3, %t1, %t2
+	retv %t3

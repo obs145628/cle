@@ -1,0 +1,30 @@
+matvecmul:
+.fun
+
+B0:
+	mov_lsl %w8, w8, 2  ; w8 = n4
+	mov %w9, %wzr ; w9 = i
+	cbz %w3, @B4
+
+B1:
+	mov %w10, %wzr ; w10 = val
+	mov %w11, %wzr ; w11 = j4
+	madd %w12, %w8, %w9, %w0 ; w12 = mp
+	cbz %w8, @B3
+
+B2:
+	ldr_v1 %w13, %w1, %w11
+	ldr_v1 %w14, %w12, %w11
+	madd %w10, %w13, %w14, %w10
+	add %w11, %w11, 4
+	cmp %w11, %w8
+	b_ne @B2
+
+B3:
+ 	str_lsl %w10, %w2, %w9, 2
+	add %w9, %w9, 1
+	cmp %w9, %w4
+	b_ne @B1
+
+B4:
+	ret

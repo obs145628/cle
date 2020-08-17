@@ -1,0 +1,19 @@
+@ins normal leal u u d
+@ins normal leal_v2 u c d
+@ins normal addl c|u x
+@ins normal subl c|u x
+@ins normal imull c|u x
+@ins normal negl x
+@ins normal movl c|u d
+@ins normal movl_v1 u u c
+@ins normal movl_v2 u c d
+@ins normal movl_v3 u u c d
+@ins normal movq c|u d
+@ins normal pushq u
+@ins normal popq d
+@ins normal cmpq c|u c|u
+@ins normal testq c|u c|u
+@ins branch je b
+@ins branch jmp b
+@ins branch jne b
+@ins ret retq
