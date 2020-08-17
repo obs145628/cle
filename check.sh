@@ -85,3 +85,5 @@ check_cmake_proj middle-end-optis/global-code-placement
 check_cmake_proj middle-end-optis/idom
 check_cmake_proj middle-end-optis/interproc-constprop
 check_cmake_proj middle-end-optis/lazy-code-motion
+check_cmake_proj middle-end-optis/live-uninit-regs
+check_cmake_proj middle-end-optis/local-value-numbering

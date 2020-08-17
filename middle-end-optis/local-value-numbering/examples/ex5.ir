@@ -1,0 +1,6 @@
+add %a %x 0
+add %a %x %x
+sub %a %x 0
+sub %a %x %x
+mul %a %x 0
+mul %a %x 1

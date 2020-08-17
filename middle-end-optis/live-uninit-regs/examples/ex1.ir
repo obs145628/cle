@@ -1,0 +1,19 @@
+B0:
+	mov %i, 1
+	b @B1
+
+B1:
+	beq %i, 1, @B2, @B3
+
+B2:
+	mov %s, 0
+	b @B3
+
+B3:
+	add %s, %s, %i
+	add %i, %i, 1
+	beq %i, 10, @B4, @B1
+
+B4:
+	print %s
+	ret

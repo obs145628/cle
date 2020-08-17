@@ -1,0 +1,4 @@
+add %a %b %c
+sub %b %a %d
+add %c %b %c
+sub %d %a %d

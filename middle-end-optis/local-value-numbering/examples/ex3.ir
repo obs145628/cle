@@ -1,0 +1,6 @@
+mov %a 7
+mov %b %a
+add %c %b 9
+add %d %c %a
+sub %e %x %b
+sub %f %x %b

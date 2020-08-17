@@ -57,3 +57,15 @@ Lazy Code Motion.
 Try to move code in early blocks where it gets executed less often.  
 Implementation doesn't work well.  
 Engineer a Compiler Book.
+
+## live-uninit-regs (C++)
+
+Live Unitialized Registers.  
+Find registers that are potentially used before being defined.  
+Engineer a Compiler Book.
+
+## local-value-numbering (C++)
+
+Local Value Numbering.  
+Find duplicate instructions in a basic block using hash tables.  
+Engineer a Compiler Book.

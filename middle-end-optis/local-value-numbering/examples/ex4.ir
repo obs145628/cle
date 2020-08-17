@@ -1,0 +1,6 @@
+add %c %a %b
+add %d %b %a
+sub %e %a %b
+sub %f %b %a
+mul %g %e 3
+mul %h 3 %e

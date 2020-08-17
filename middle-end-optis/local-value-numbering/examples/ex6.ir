@@ -1,0 +1,4 @@
+add %a 3 4
+mov %b 6
+sub %c %a %b
+mul %d %x %c
