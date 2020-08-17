@@ -8,6 +8,10 @@ Several compiler experiments based on my readings of book / papers
 
 Compiler backend
 
+### middle-end-optis
+
+Compiler middle-end optimizations
+
 ### utils
 
 Several libs and other misc files used through the whole repository.

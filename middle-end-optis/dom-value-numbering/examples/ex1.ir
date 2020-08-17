@@ -1,0 +1,9 @@
+foo:
+.fun void, %x, %y
+
+B0:
+	add %r1, %x, 1
+	sub %r2, %x, %r1
+	add %r3, %x, 1
+	mul %r4, %r2, %r3
+	ret
