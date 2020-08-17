@@ -1,0 +1,40 @@
+
+foo:
+.fun void, %x, %y
+
+B0:
+  add %t1, %x, %y
+  b @B1
+
+B1:
+  add %t2, %t1, 4
+  bc 0, @B2, @B5
+
+B2:
+  sub %t3, %t1, %t2
+  b @B3
+
+B3:
+  phi %t4, @B2, 4, @B7, %t10
+  add %t5, %t4, 2
+  bc 0, @B1, @B4
+
+B4:
+  ret
+
+B5:
+  mul %t6, %t2, %y
+  bc 0, @B6, @B8
+
+B6:
+  sub %t7, %x, %t6
+  b @B7
+
+B7:
+  phi %t9, @B6, %t7, @B8, %t8
+  add %t10, %t9, %t9
+  b @B3
+
+B8:
+  sub %t8, %y, %t6
+  b @B7

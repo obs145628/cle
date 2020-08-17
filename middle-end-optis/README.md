@@ -98,4 +98,12 @@ Engineer a Compiler Book.
 
 Conversion to SSA semi-pruned formed.  
 Convert non-SSA code into SSA semi-pruned (doesn't remove all useless phis).  
-Enginerr a Compiler Book.
+Engineer a Compiler Book.
+
+## superblock-cloning (C++)
+
+Superblock Cloning.  
+Clone all blocks in all paths from loop begin.  
+This way, some jumps to a single block may be eliminated (reduce branches).  
+SSA form.  
+Engineer a Compiler Book.
