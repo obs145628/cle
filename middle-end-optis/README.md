@@ -28,3 +28,11 @@ Function inlining.
 Inline all function calls.  
 Heursitic choice not implemented.  
 Engineer a Compiler Book.
+
+## global-code-placement (C++)
+
+Global Code Placement.  
+Reorder basic blocks in a mroe efficient manner.  
+Try to order them in order to reduce jumps for the more executed blocks.  
+Use profilling infos (in comments in example files).  
+Engineer a Compiler Book.
