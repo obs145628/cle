@@ -21,6 +21,7 @@ Several libs and other misc files used through the whole repository.
 Tested on Ubuntu 18.04:
 - C++ compiler: g++ 7.5.0.
 - Cmake 3.10.2.
+- python 3.6.9
 
 ## Build
 

@@ -1,0 +1,8 @@
+
+
+goal ; reg                 ;  0
+reg  ; Reg                 ;  0
+reg  ; Int                 ;  1
+reg  ; Add(reg, reg)       ;  2
+reg  ; Load(reg)           ; 10
+reg  ; Load(Add(reg, Int)) ; 10

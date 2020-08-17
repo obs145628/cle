@@ -30,13 +30,29 @@ if [[ $* == *--only-build* ]]; then {
   CARGO_CMD="cargo build"
 } fi
 
-
-
 check_cargo_proj() {
     (
 	echo "Testing $1 ..."
 	cd ./$1;
 	eval $CARGO_CMD
+
+    )
+    if [ $? -ne 0 ]; then {
+	echo "Tests failed for project $1";
+	exit 1
+    } fi
+}
+
+SHELL_CMD="./check.sh"
+if [[ $* == *--only-build* ]]; then {
+  SHELL_CMD="./check.sh --only-build"
+} fi
+
+check_shell_proj() {
+    (
+	echo "Testing $1 ..."
+	cd ./$1;
+	eval $SHELL_CMD
 
     )
     if [ $? -ne 0 ]; then {
@@ -53,6 +69,7 @@ check_cmake_proj utils/libcpp_gop10
 check_cmake_proj backend/inst-sched/local-list
 check_cmake_proj backend/inst-sched/local-list-eb
 check_cmake_proj backend/inst-selec/tree-match-burs1
+check_shell_proj backend/inst-selec/tree-match-burs-table
 check_cmake_proj backend/inst-selec/tree-match-graphs
 check_cmake_proj backend/inst-selec/tree-match-naive
 check_cmake_proj backend/reg-alloc/block-bottomup

@@ -1,0 +1,5 @@
+
+t0 = Add 2 x
+t1 = Add t0 y
+t2 = Load t1
+@ = Add t2 z

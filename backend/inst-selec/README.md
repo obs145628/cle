@@ -11,6 +11,13 @@ Generate aa64-like or x64-like code. (x64-like doesn't work).
 Enginneer a Compiler book.  
 BURS papers
 
+## tree-match-burs-table (python)
+
+Toy algorithm implementation.  
+Some experiments to implement BURS using precomputed tables.  
+Tested only with a very simple example.  
+BURS papers
+
 ## tree-match-graphs (C++)
 
 Toy algorithm implementation.  

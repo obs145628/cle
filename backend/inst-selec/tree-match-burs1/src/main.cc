@@ -26,7 +26,7 @@ std::unique_ptr<gop::Module> init_mod(const std::string &fun_name) {
 // Based on BURS (Bottom-Up Rewrite System)
 //
 // Matching is still a naive version (not tabled build)
-// Look at python version (/py/be-iselec/burs/) to see a really basic
+// Look at python version (tree-match-burs-table) to see a really basic
 // table-version, with states compression
 //
 // Inspired from:
