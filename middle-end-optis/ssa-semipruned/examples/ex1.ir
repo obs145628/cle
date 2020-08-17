@@ -1,0 +1,43 @@
+foo:
+.fun
+
+B0:
+	mov %i, 1
+	b @B1
+
+B1:
+	mov %a, 3
+	mov %c, 3
+	blt %a, %c, @B2, @B5
+
+B2:
+	mov %b, 3
+	mov %c, 3
+	mov %d, 3
+	b @B3
+
+B3:
+	add %y, %a, %b
+	add %z, %c, %d
+	add %i, %i, 1
+	blt %i, 100, @B1, @B4
+
+B4:
+	ret
+
+B5:
+	mov %a, 3
+	mov %d, 3
+	blt %a, %d, @B6, @B8
+
+B6:
+	mov %d, 3
+	b @B7
+
+B7:
+	mov %b, 3
+	b @B3
+
+B8:
+	mov %c, 3
+	b @B7

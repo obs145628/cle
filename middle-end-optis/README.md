@@ -84,4 +84,18 @@ Sparse Conditional Constant Propagation.
 Perform constant propagation through cycles, only for block that get executed
 (ignore branches never taken).
 SSA Code.  
-Engineer a Compiler Book.  
+Engineer a Compiler Book.
+
+## sparse-simple-constprop (C++)
+
+Sparse Simple Constant Propagation.  
+Perform constant propagation on SSA.  
+This version can propagate values through cycles of the SSA graph.  
+SSA Code.  
+Engineer a Compiler Book.
+
+## ssa-semipruned (C++)
+
+Conversion to SSA semi-pruned formed.  
+Convert non-SSA code into SSA semi-pruned (doesn't remove all useless phis).  
+Enginerr a Compiler Book.

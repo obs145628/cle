@@ -1,0 +1,14 @@
+foo:
+.fun void
+b0:
+	mov %x0, 17
+	mov %c, 0
+	b @b1
+
+b1:
+	phi %x1, @b0, %x0, @b1, %x2
+	add %x2, %x1, %c
+	bc 0, @b1, @b2
+
+b2:
+	ret
