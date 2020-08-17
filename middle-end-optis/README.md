@@ -50,3 +50,10 @@ Constant Propagation through call sites.
 If all call sites use same constant value for an argument, can be propogated to function body.  
 Input code is SSA.  
 Engineer a Compiler Book.
+
+## lazy-code-motion (C++)
+
+Lazy Code Motion.  
+Try to move code in early blocks where it gets executed less often.  
+Implementation doesn't work well.  
+Engineer a Compiler Book.

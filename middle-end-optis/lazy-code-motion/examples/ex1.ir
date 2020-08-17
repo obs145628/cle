@@ -1,0 +1,19 @@
+B1:
+	loadi 1, %r1
+	i2i %r1, %r2
+	loadai %r0, @m, %r3
+	i2i %r3, %r4
+	cmplt %r2, %r4, %r5
+	cbr %r5, @B2, @B3
+
+B2:
+	mult %r17, %r18, %r20
+	add %r19, %r20, %r21
+	i2i %r21, %r8
+	addi %r2, 1, %r6
+	i2i %r6, %r2
+	cmpgt %r2, %r4, %r7
+	cbr %r7, @B3, @B2
+
+B3:
+	ret
