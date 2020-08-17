@@ -2,6 +2,12 @@
 
 Compiler middle-end optimizations
 
+## dead-code-elim (C++ / LLVM)
+
+Dead Code Elimination.  
+Remove instructions unused / without side effects, empty and unreachable blocks
+Engineer a Compiler Book.
+
 ## dom-value-numbering (C++)
 
 Dominator Based value numbering technique.  

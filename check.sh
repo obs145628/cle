@@ -77,4 +77,5 @@ check_cmake_proj backend/reg-alloc/block-naive
 check_cmake_proj backend/reg-alloc/color-ssa-bu
 check_cmake_proj backend/reg-alloc/color-ssa-td
 
+check_cmake_proj middle-end-optis/dead-code-elim
 check_cmake_proj middle-end-optis/dom-value-numbering
