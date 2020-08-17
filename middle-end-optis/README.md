@@ -69,3 +69,11 @@ Engineer a Compiler Book.
 Local Value Numbering.  
 Find duplicate instructions in a basic block using hash tables.  
 Engineer a Compiler Book.
+
+## procedure-placement (C++)
+
+Procedure Placement.  
+Reorder procedures in close.  
+Try to put calees close to callers, to improve cache performance.  
+Choices based on heursitics.  
+Engineer a Compiler Book.

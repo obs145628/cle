@@ -1,0 +1,35 @@
+P0:
+.fun
+	call P1 ; 10
+	call P5 ; 2
+	ret
+
+P1:
+.fun
+	call P2 ; 20
+	call P3 ; 10
+	call P4 ; 10
+	ret
+
+P2:
+.fun
+	ret
+
+P3:
+.fun
+	ret
+
+P4:
+.fun
+	ret
+
+P5:
+.fun
+	call P4 ; 52
+	call P5 ; 50
+	call P6 ; 104
+	ret
+
+P6:
+.fun
+	ret
