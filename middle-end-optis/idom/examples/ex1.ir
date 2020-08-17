@@ -1,0 +1,30 @@
+
+foo:
+.fun void
+
+B0:
+  b @B1
+
+B1:
+  bc 0, @B2, @B5
+
+B2:
+  b @B3
+
+B3:
+  bc 0, @B1, @B4
+
+B4:      
+  ret
+
+B5:
+  bc 0, @B6, @B8
+
+B6:
+  b @B7
+
+B7:
+  b @B3
+
+B8:      
+  b @B7

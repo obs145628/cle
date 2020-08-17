@@ -1,0 +1,21 @@
+
+foo:
+.fun void
+
+B0:
+  bc 0, @B1, @B5
+
+B1:
+  b  @B2
+
+B2:
+  b @B3
+
+B3:
+  bc 0, @B2, @B4
+
+B4:      
+  b @B3
+
+B5:
+  bc 0, @B3, @B4

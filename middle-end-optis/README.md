@@ -36,3 +36,9 @@ Reorder basic blocks in a mroe efficient manner.
 Try to order them in order to reduce jumps for the more executed blocks.  
 Use profilling infos (in comments in example files).  
 Engineer a Compiler Book.
+
+## idom (C++)
+
+Immediate Dominator.  
+Build Dominator tree and Immediate Dominator / Dominator sets.  
+Engineer a Compiler Book.
