@@ -1,0 +1,15 @@
+foo:
+.fun int
+
+B0:
+	add %i0, 0, 1
+	sub %j, 5, 3
+	beq %j, 2, @B1, @B2
+
+B1:
+	add %i1, %i0, 2
+	b @B2
+
+B2:
+	phi %i2, @B0, %i0, @B1, %i1
+	ret %i2

@@ -77,3 +77,11 @@ Reorder procedures in close.
 Try to put calees close to callers, to improve cache performance.  
 Choices based on heursitics.  
 Engineer a Compiler Book.
+
+## sparsecond-constprop (C++)
+
+Sparse Conditional Constant Propagation.  
+Perform constant propagation through cycles, only for block that get executed
+(ignore branches never taken).
+SSA Code.  
+Engineer a Compiler Book.  

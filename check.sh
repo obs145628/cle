@@ -88,3 +88,4 @@ check_cmake_proj middle-end-optis/lazy-code-motion
 check_cmake_proj middle-end-optis/live-uninit-regs
 check_cmake_proj middle-end-optis/local-value-numbering
 check_cmake_proj middle-end-optis/procedure-placement
+check_cmake_proj middle-end-optis/sparsecond-constprop
