@@ -31,9 +31,14 @@ Tested on Ubuntu 18.04:
 
 ## Build
 
+Load dependencies:
+```
+git submodule update --init
+```
+
 Make sure rustc is set to nightly to build `logia` server:
 ```
-cd utils/logia/server
+cd extern/logia/server
 rustup override set nightly
 ```
 
