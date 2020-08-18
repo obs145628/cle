@@ -114,3 +114,11 @@ Superlocal Value Numbering.
 Extension to Local Value Numbering, that applyes to a path a basic blocks, 
 each having only one predecessor.
 Engineer a Compiler Book.
+
+## tree-height-balancing (C++ / LLVM)
+
+Tree Height Balancing.  
+Find in each block sequences of operations that correspondong to a tree of integer operations.  
+Rebalance the tree, which should reduce the instruction dependencies.  
+Engineer a Compiler Book.
+
