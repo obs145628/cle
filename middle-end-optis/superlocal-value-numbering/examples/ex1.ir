@@ -1,0 +1,37 @@
+B0:
+	add %m, %a, %b
+	add %n, %a, %b
+	bgt %a, %b, @B1, @B2
+
+B1:
+	add %p, %c, %d
+	add %r, %c, %d
+	b @B6
+
+B2:
+	add %q, %a, %b
+	add %r, %c, %d
+	bgt %a, %b, @B3, @B4
+
+B3:
+	add %e, %b, 18
+	add %s, %a, %b
+	add %u, %e, %f
+	b @B5
+
+B4:
+	add %e, %a, 17
+	add %t, %c, %d
+	add %u, %e, %f
+	b @B5
+
+B5:
+	add %v, %a, %b
+	add %w, %c, %d
+	add %x, %e, %f
+	b @B6
+
+B6:
+	add %y, %a, %b
+	add %z, %c, %d
+	ret

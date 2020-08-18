@@ -107,3 +107,10 @@ Clone all blocks in all paths from loop begin.
 This way, some jumps to a single block may be eliminated (reduce branches).  
 SSA form.  
 Engineer a Compiler Book.
+
+## superlocal-value-numbering (C++)
+
+Superlocal Value Numbering.  
+Extension to Local Value Numbering, that applyes to a path a basic blocks, 
+each having only one predecessor.
+Engineer a Compiler Book.

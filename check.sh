@@ -92,3 +92,4 @@ check_cmake_proj middle-end-optis/sparsecond-constprop
 check_cmake_proj middle-end-optis/sparse-simple-constprop
 check_cmake_proj middle-end-optis/ssa-semipruned
 check_cmake_proj middle-end-optis/superblock-cloning
+check_cmake_proj middle-end-optis/superlocal-value-numbering
