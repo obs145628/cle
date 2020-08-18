@@ -1,0 +1,17 @@
+my_add:
+.fun int, %x, %y
+
+B0:
+	add %r, %x, %y
+	ret %r
+
+_start:
+.fun void
+
+B0:
+	mov %a, 6
+	mov %b, 7
+	call %c, @my_add, %a, %b
+	call @_std_print, %c
+	call @_std_exit, 0
+	ret

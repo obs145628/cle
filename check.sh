@@ -94,3 +94,4 @@ check_cmake_proj middle-end-optis/ssa-semipruned
 check_cmake_proj middle-end-optis/superblock-cloning
 check_cmake_proj middle-end-optis/superlocal-value-numbering
 check_cmake_proj middle-end-optis/tree-height-balancing
+check_cmake_proj middle-end-optis/unssa

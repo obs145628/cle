@@ -1,0 +1,15 @@
+foo:
+.fun void
+b0:
+	b @b1
+
+b1:
+	phi %x, @b0, 0, @b1, 0
+	phi %y, @b0, 0, @b1, 1
+	phi %z, @b0, 0, @b1, %x
+	phi %t, @b0, 0, @b1, %x
+	
+	bc 0, @b1, @b2
+
+b2:
+	ret

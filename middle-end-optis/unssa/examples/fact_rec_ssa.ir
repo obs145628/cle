@@ -1,0 +1,32 @@
+fact:
+.fun int, %x
+
+B0:
+	cmplt %t, %x, 2
+	bc %t, @base, @rec
+
+base:
+	ret 1
+
+rec:
+	sub %x1, %x, 1
+	call %xm, @fact, %x1
+	mul %res, %x, %xm
+	ret %res
+
+_start:
+.fun void
+start:
+	b @loop
+
+loop:
+	phi %i, @start, 0, @loop, %i1
+	call %v, @fact, %i
+	call @_std_print, %v
+	add %i1, %i, 1
+	cmplt %c, %i1, 10
+	bc %c, @loop, @end
+
+end:
+	call @_std_exit, 0
+	ret

@@ -1,0 +1,15 @@
+_start:
+.fun void
+b0:
+	mov %c, 0
+	mov %i0, 0
+	b @b1
+
+b1:
+	phi %i1, @b0, %i0, @b1, %i2
+	add %i2, %i1, 1
+	bc %c, @b1, @b2
+
+b2:
+	add %z, %i1, 67
+	ret

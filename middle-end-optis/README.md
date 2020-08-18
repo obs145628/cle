@@ -122,3 +122,8 @@ Find in each block sequences of operations that correspondong to a tree of integ
 Rebalance the tree, which should reduce the instruction dependencies.  
 Engineer a Compiler Book.
 
+## unssa (C++)
+
+UnSSA.  
+Convert SSA code to non-SSA form (replace all phi instructions).  
+Engineer a Compiler Book.
