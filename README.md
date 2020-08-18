@@ -31,6 +31,12 @@ Tested on Ubuntu 18.04:
 
 ## Build
 
+Make sure rustc is set to nightly to build `logia` server:
+```
+cd utils/logia/server
+rustup override set nightly
+```
+
 Build and run tests:
 ```
 ./check.sh
