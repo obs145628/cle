@@ -408,5 +408,4 @@ Cargo.lock
 # Custom
 
 _build/
-/extern/
 *.clang-format

@@ -1,0 +1,3 @@
+[submodule "extern/logia"]
+	path = extern/logia
+	url = https://github.com/obs145628/logia.git
