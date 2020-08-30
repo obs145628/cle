@@ -4,6 +4,9 @@ import config
 
 from logia.mdgfmdoc import MdGfmDoc
 from logia.program import Program
+import rx2nfa
+import nfa2dfa
+from dfamin import DFAMinimizer
 
 '''
 Syntax:
@@ -21,17 +24,22 @@ Shorcuts:
 - . -> c_0|c_1|..|c_n with c_1..c_n all chars in alphabet
 
 // operators precedence:
-1: unary RTL: *, ?, +
+1: unary LTR: *, ?, +
 2: binary LTR: MN
 3: binary LTR M|N
 '''
 
-SPECIALS = ['[', ']', '(', ')', '*', '|', '+', '?', '.']
+SPECIALS = ['[', ']', '(', ')', '*', '|', '+', '?', '.', '\\']
 
 class NodeConcat:
     def __init__(self, left, right):
         self.left = left
         self.right = right
+
+    def tname(self): return 'concat'
+
+    def clone(self):
+        return NodeConcat(self.left.clone(), self.right.clone())
 
     def to_dot(self, g):
         l = self.left.to_dot(g)
@@ -46,6 +54,11 @@ class NodeOr:
         self.left = left
         self.right = right
 
+    def tname(self): return 'or'
+
+    def clone(self):
+        return NodeOr(self.left.clone(), self.right.clone())
+
     def to_dot(self, g):
         l = self.left.to_dot(g)
         r = self.right.to_dot(g)
@@ -54,14 +67,47 @@ class NodeOr:
         g.add_edge(op, r)
         return op
 
-class NodeChar:
-    def __init__(self, c):
-        self.c = c
+class NodeRange:
+    def __init__(self, chars):
+        self.chars = list(sorted(set(chars)))
+
+    def tname(self): return 'range'
+
+    def clone(self):
+        return NodeRange(self.chars)
 
     def to_dot(self, g):
-        op = g.add_vertex('[{}]'.format(self.c))
+        op = g.add_vertex('[{}]'.format(''.join(self.chars)))
         return op
 
+class NodeStar:
+    def __init__(self, child):
+        self.child = child
+
+    def tname(self): return 'star'
+
+    def clone(self):
+        return NodeStar(self.child.clone())
+
+    def to_dot(self, g):
+        child = self.child.to_dot(g)
+        op = g.add_vertex('*')
+        g.add_edge(op, child)
+        return op
+
+class NodeEps:
+    def __init__(self):
+        pass
+
+    def tname(self): return 'eps'
+
+    def clone(self):
+        return NodeEps()
+
+    def to_dot(self, g):
+        op = g.add_vertex('EPS')
+        return op
+    
     
 
 class Regex:
@@ -70,19 +116,39 @@ class Regex:
         self.rx_str = "".join(rx_str.split())
         self.pos = 0
         self.alpha = alpha
+        self.root = None
 
+    def build(self):
+        self.build_regex()
+        self.build_nfa()
+        self.build_dfa()
+        self.minimize_dfa()
+        
+    # returns True if s matches the regex
+    def match(self, s):
+        return self.dfa.match(s)
+
+    def build_regex(self):
         self.root = self.r_root()
 
-        self.doc = Program.instance().add_doc(MdGfmDoc, "regex")
+        doc = Program.instance().add_doc(MdGfmDoc, "regex")
 
         g = DotGraph(directed=True)
         self.root.to_dot(g)
 
-        self.doc.write('```\n{}\n```\n'.format(self.rx_str))
-        
-        self.doc.h1("Regex Tree")
-        self.doc.write(g)
-        
+        doc.write('```\n{}\n```\n'.format(self.rx_str))
+        doc.h1("Regex Tree")
+        doc.write(g)
+
+    def build_nfa(self):
+        self.nfa = rx2nfa.convert(self.root)
+
+    def build_dfa(self):
+        self.dfa = nfa2dfa.convert(self.nfa, self.alpha)
+
+    def minimize_dfa(self):
+        minimizer = DFAMinimizer(self.dfa, self.alpha)
+        minimizer.run()
 
     def peekc(self):
         if self.pos == len(self.rx_str):
@@ -124,13 +190,32 @@ class Regex:
 
         return left
 
+    '''
+    op1 -> prim ("*" | "?" | "+")*
+    '''
     def r_op1(self):
-        return self.r_prim()
+        res = self.r_prim()
+        while self.peekc() in ['*', '?', '+']:
+            c = self.getc()
+
+            if c == '*':
+                res = NodeStar(res)
+            elif c == '?':
+                res = NodeOr(res, NodeEps())
+            elif c == '+':
+                res = NodeConcat(res, NodeStar(res.clone()))
+            else:
+                assert 0
+            
+
+        return res
 
     '''
     prim -> "(" exp ")"
     prim -> range
+    prim -> special
     prim -> :char with :char in alphabet and :char not in SPECIALS (reserved symbols)
+    prim -> "."
     '''
     def r_prim(self):
         c = self.peekc()
@@ -145,20 +230,54 @@ class Regex:
         if c == '[':
             return self.r_range()
 
+        if c == '\\':
+            return self.r_special()
+
 
         if c in self.alpha.larr and c not in SPECIALS:
             self.getc()
-            return NodeChar(c)
-            
+            return NodeRange([c])
+
+        if c == ".":
+            self.getc()
+            return NodeRange(self.alpha.larr)
         
         assert 0
         
 
+    '''
+    range -> "[" range-entry* "]"
+    range-entry -> :char
+    range-entry -> :char "-" :char
+    '''
     def r_range(self):
         assert self.getc() == '['
-        assert self.getc() == ']'
-        return None
+        chars = []
 
+        while self.peekc() != ']':
+            c1 = self.getc()
+            assert c1 in self.alpha.larr and c1 not in SPECIALS
+
+            if self.peekc() == '-':
+                self.getc()
+                c2 = self.getc()
+                assert c2 in self.alpha.larr and c2 not in SPECIALS
+                chars += self.alpha.get_range(c1, c2)
+            else:
+                chars.append(c1)
+        
+        assert self.getc() == ']'
+        return NodeRange(chars)
+
+    '''
+    special -> \eps
+    '''
+    def r_special(self):
+        assert self.getc() == '\\'
+        assert self.getc() == 'e'
+        assert self.getc() == 'p'
+        assert self.getc() == 's'
+        return NodeEps()
 
 
     

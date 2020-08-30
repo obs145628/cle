@@ -1,0 +1,9 @@
+ab
+abab
+ababababab
+1
+1c
+1cc
+2c
+2ccc
+0ccccccc
