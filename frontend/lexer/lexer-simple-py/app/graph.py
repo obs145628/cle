@@ -1,5 +1,7 @@
 import os
 
+import config
+
 # Undirected graph
 class Graph:
 
@@ -48,6 +50,10 @@ class Graph:
 
 
     def logia_doc_write(self, doc):
+        if config.HIDE_DOT:
+            doc.write("Graph: {} vertices\n".format(self.v))
+            return
+        
         fname = doc.gen_file_name()
         dot_path = os.path.join(doc.out_dir(), fname + ".dot")
         self.save_dot(dot_path)

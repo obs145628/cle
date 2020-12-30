@@ -1,0 +1,11 @@
+if                     => IF
+nif		       => NIF
+"="		       => SET
+">"		       => GT
+">="		       => GE
+"=="		       => EQ
+[a-zA-Z_][0-9a-zA-Z_]* => ID
+[0-9]+                 => INT
+:space:+               => WS
+:eof:		       => EOF
+

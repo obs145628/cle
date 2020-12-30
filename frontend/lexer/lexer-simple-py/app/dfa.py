@@ -1,5 +1,7 @@
 import os
 
+import config
+
 # Static DFA
 # Deterministic Finite Automaton
 # One start state, multiple final states, and one error state
@@ -75,6 +77,10 @@ class DFA:
 
 
     def logia_doc_write(self, doc):
+        if config.HIDE_DOT:
+            doc.write("DFA: {} states\n".format(self.sc))
+            return
+        
         fname = doc.gen_file_name()
         dot_path = os.path.join(doc.out_dir(), fname + ".dot")
         self.save_dot(dot_path)

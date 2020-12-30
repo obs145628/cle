@@ -11,3 +11,9 @@ if [ $? -ne 0 ]; then {
     echo "Test 'python3 app/app-lexer-simple.py config/rules1.txt examples/input1.txt' Failed !";
     exit 1
 } fi
+
+python3 app/app-lexer-simple.py config/rules2.txt examples/input2.txt
+if [ $? -ne 0 ]; then {
+    echo "Test 'python3 app/app-lexer-simple.py config/rules2.txt examples/input2.txt' Failed !";
+    exit 1
+} fi

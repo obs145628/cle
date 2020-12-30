@@ -9,6 +9,7 @@ from logia.program import Program
 Syntax:
 Base:
 - a: match a chatachter a
+- "abcd": match a then b then c then d
 - \eps: match the empty string (epsilon)
 - M|N: match regex M or N
 - MN: match regex M, then regex N
@@ -18,6 +19,7 @@ Shorcuts:
 - M+ -> MM*
 - M? -> M|\eps
 - [a-d46-8] -> a|b|c|d|4|6|7|8
+- [^...] -> opposite of range
 - "." -> c_0|c_1|..|c_n with c_1..c_n all chars in alphabet
 - ":" :id ":" replace by range of chars for classname id
 
@@ -27,7 +29,7 @@ Shorcuts:
 3: binary LTR M|N
 '''
 
-SPECIALS = ['[', ']', '(', ')', '*', '|', '+', '?', '.', '\\', ':']
+SPECIALS = ['[', ']', '(', ')', '*', '|', '+', '?', '.', '\\', ':', '"']
 
 class NodeConcat:
     def __init__(self, left, right):
@@ -196,6 +198,7 @@ class Regex:
     prim -> special
     prim -> :char with :char in alphabet and :char not in SPECIALS (reserved symbols)
     prim -> "."
+    prim -> quote
     prim -> classname
     '''
     def r_prim(self):
@@ -223,6 +226,9 @@ class Regex:
             self.getc()
             return NodeRange(self.alpha.larr, self.alpha)
 
+        if c == "\"":
+            return self.r_quote()
+
         if c == ':':
             return self.r_classname()
         
@@ -230,17 +236,21 @@ class Regex:
         
 
     '''
-    range -> "[" range-entry* "]"
+    range -> "[" [^] range-entry* "]"
     range-entry -> :char
     range-entry -> :char "-" :char
     '''
     def r_range(self):
         assert self.getc() == '['
+        inv = False
+        if self.peekc() == '^':
+            self.getc()
+            inv = True
         chars = []
 
         while self.peekc() != ']':
             c1 = self.getc()
-            assert c1 in self.alpha.larr and c1 not in SPECIALS
+            assert c1 in self.alpha.larr
 
             if self.peekc() == '-':
                 self.getc()
@@ -251,6 +261,8 @@ class Regex:
                 chars.append(c1)
         
         assert self.getc() == ']'
+        if inv:
+            chars = self.alpha.inv_chars(chars)
         return NodeRange(chars, self.alpha)
 
     '''
@@ -264,6 +276,41 @@ class Regex:
         return NodeEps()
 
 
+    '''
+    quote -> '"' :id '"'
+    '''
+    def r_quote(self):
+        assert self.getc() == '"'
+        assert self.peekc() != '"'
+        left = None
+        while self.peekc() != '"':
+            
+            c = self.getc()
+            if c == '\\':
+                qual = self.getc()
+                if qual == '\\':
+                    c == '\\'
+                elif qual == 'n':
+                    c == '\n'
+                elif qual == 't':
+                    c == '\t'
+                elif qual == 'r':
+                    c == '\r'
+                elif qual == '"':
+                    c == '"'
+                else:
+                    assert 0
+            
+            right = NodeRange([c], self.alpha)
+            if left is None:
+                left = right
+            else:
+                left = NodeConcat(left, right)
+        assert self.getc() == '"'
+
+        return left
+    
+    
     '''
     classname -> ":" :id ":"
     '''

@@ -1,5 +1,7 @@
 import os
 
+import config
+
 # Static NFA
 # Can only add transitions
 class NFA:
@@ -65,6 +67,10 @@ class NFA:
 
 
     def logia_doc_write(self, doc):
+        if config.HIDE_DOT:
+            doc.write("NFA: {} states\n".format(self.sc))
+            return
+        
         fname = doc.gen_file_name()
         dot_path = os.path.join(doc.out_dir(), fname + ".dot")
         self.save_dot(dot_path)

@@ -1,5 +1,7 @@
 import os
 
+import config
+
 class DotGraph:
 
     def __init__(self, directed):
@@ -30,6 +32,10 @@ class DotGraph:
 
 
     def logia_doc_write(self, doc):
+        if config.HIDE_DOT:
+            doc.write("Graph: {} vertices\n".format(len(self.vertices)))
+            return
+        
         fname = doc.gen_file_name()
         dot_path = os.path.join(doc.out_dir(), fname + ".dot")
         self.save_dot(dot_path)
